@@ -1,0 +1,178 @@
+---
+title: Services
+description: Learn the main shipping services supported by CFC Ops and when to use each one. This page helps users choose the right service for your cargo and delivery needs.
+---
+
+## Overview
+
+CFC Ops gives you a simple way to match the right shipping service to the shipment you need to move. You can compare parcel, consolidated freight, import and export shipping, and full truckload options without having to guess which one fits best.
+
+Use this page as a starter kit. The examples are generic by design, so you can adapt them to your own routes, pricing rules, and operational workflow.
+
+<Callout kind="info">
+
+This page is a template for organizing service documentation. Replace the sample descriptions, rules, and examples with your own operational details.
+
+</Callout>
+
+## Service options at a glance
+
+<Columns cols={2}>
+  <Card title="Parcel shipping" icon="package" href="#parcel-shipping">
+    
+  Use this when you need to move individual boxes or small packages quickly.
+  
+  </Card>
+  <Card title="LTL consolidated freight" icon="truck" href="#ltl-consolidated-freight">
+    
+  Use this when your shipment shares trailer space with other freight.
+  
+  </Card>
+  <Card title="Import and export shipping" icon="globe" href="#import-and-export-shipping">
+    
+  Use this for cross-border moves that need documentation and handoff planning.
+  
+  </Card>
+  <Card title="Full truckload" icon="truck" href="#full-truckload-options">
+    
+  Use this when one customer shipment fills most or all of the trailer.
+  
+  </Card>
+</Columns>
+
+## How to choose the right service
+
+Choose the service by looking at shipment size, transit urgency, handling requirements, and destination type. If you choose too small a service level, you may delay delivery or increase touchpoints. If you choose too large a service level, you may pay for unused capacity.
+
+### Selection criteria
+
+| Criterion | Best fit | Why it matters |
+|----------|----------|----------------|
+| Small parcel count | Parcel shipping | Keeps handling simple and cost-effective |
+| Mixed freight with flexible timing | LTL consolidated freight | Shares cost across multiple shipments |
+| Cross-border movement | Import and export shipping | Supports customs and handoff steps |
+| High volume or dedicated load | Full truckload | Reduces transfers and improves control |
+
+## Service details
+
+### Parcel shipping
+
+Parcel shipping is best for smaller shipments that move as separate units. It works well when you need predictable handling, frequent dispatches, and straightforward tracking.
+
+<CodeGroup tabs="JavaScript,cURL">
+  ```javascript
+const shipment = {
+  service: "parcel",
+  pieces: 6,
+  totalWeightKg: 48,
+  origin: "Monterrey, NL",
+  destination: "Querétaro, QRO",
+  serviceLevel: "standard"
+};
+
+console.log("Create parcel shipment:", shipment);
+  ```
+  ```bash
+curl -X POST "https://api.example.com/shipments" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -d '{
+    "service": "parcel",
+    "pieces": 6,
+    "totalWeightKg": 48,
+    "origin": "Monterrey, NL",
+    "destination": "Querétaro, QRO",
+    "serviceLevel": "standard"
+  }'
+  ```
+</CodeGroup>
+
+### LTL consolidated freight
+
+LTL means less-than-truckload. You use it when your freight does not require a full trailer and you can combine it with other shipments. This option is useful for pallets, mixed cartons, and recurring regional delivery patterns.
+
+### Import and export shipping
+
+Import and export shipping helps you plan the steps between countries or customs zones. You usually use it when documents, timing, and handoff control matter as much as transport capacity.
+
+### Full truckload options
+
+Full truckload is the right choice when you need exclusive trailer space, fewer stops, or tighter control over the route. It is often used for high-volume freight, time-sensitive deliveries, or cargo that should not be combined with other loads.
+
+## Recommended workflow
+
+<Steps>
+  <Step title="Review shipment size" icon="box">
+    
+  Check the number of pieces, total weight, and pallet count before you choose a service.
+  
+  </Step>
+  <Step title="Identify route type" icon="map">
+    
+  Decide whether the shipment stays domestic or crosses a border.
+  
+  </Step>
+  <Step title="Match service level" icon="settings">
+    
+  Compare parcel, LTL, import and export, and full truckload options against your delivery goals.
+  
+  </Step>
+  <Step title="Confirm documentation" icon="file-text">
+    
+  Prepare labels, invoices, and any service-specific paperwork before dispatch.
+  
+  </Step>
+</Steps>
+
+## Platform examples
+
+<Tabs>
+  <Tab title="Operations team" icon="users">
+    
+  Use parcel shipping for small, frequent deliveries and LTL for palletized freight that can share space.
+  
+  </Tab>
+  <Tab title="Cross-border team" icon="globe">
+    
+  Use import and export shipping when customs steps, broker coordination, or border timing affect delivery.
+  
+  </Tab>
+  <Tab title="Dispatch team" icon="truck">
+    
+  Use full truckload when the load fills most of the trailer or requires minimal stopovers.
+  
+  </Tab>
+</Tabs>
+
+## Planning checklist
+
+Before you confirm a shipment, verify the following:
+
+- The shipment size matches the selected service.
+- The destination supports the required delivery schedule.
+- Handling needs are clear for fragile or high-value freight.
+- Required paperwork is complete.
+- The quoted service level matches the customer expectation.
+
+<Expandable title="Advanced service selection tips" default-open="false">
+
+If you manage recurring shipments, group them by lane, weight range, and delivery urgency. This helps you standardize service selection and reduce manual review.
+
+You can also define routing rules for common scenarios, such as parcel for under a certain threshold, LTL for palletized freight, and full truckload for dedicated moves.
+
+</Expandable>
+
+## Next steps
+
+<Columns cols={2}>
+  <Card title="Document your shipment rules" icon="book-open" href="/quickstart">
+    
+  Turn these service ideas into your own operational checklist.
+  
+  </Card>
+  <Card title="Review tracking and status" icon="check-circle" href="/authentication">
+    
+  Learn how users can monitor shipments after booking.
+  
+  </Card>
+</Columns>

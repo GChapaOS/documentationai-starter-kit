@@ -1,0 +1,286 @@
+---
+title: Access and Authentication
+description: Configure login access for internal teams and customers. This page covers authentication flows, user permissions, and secure account access.
+---
+
+## Overview
+
+CFC Ops authentication should make it easy for you to balance secure access with fast day-to-day work. Use this starter kit page as a template for a login flow, a customer portal, and internal team access that you can adapt to your own systems.
+
+You can support different user types with a single sign-in experience, then route each person to the right workspace based on role, permissions, and account status. Keep the flow simple, keep session rules clear, and make recovery paths easy to understand.
+
+<Callout kind="info">
+
+This page is a starter kit template. Replace the sample flows, labels, and permissions with your own business rules before you publish it.
+
+</Callout>
+
+## Authentication options
+
+Use a small set of clear login methods so users understand how to get in and what to do if access fails. The cards below show a practical structure for internal teams and customers.
+
+<Columns cols={2}>
+  <Card title="Customer Portal Access" icon="users" href="#customer-portal-access">
+
+  Give customers a predictable sign-in path with email, password, and recovery support.
+
+  </Card>
+  <Card title="Internal Team Login" icon="shield" href="#internal-team-login">
+
+  Separate staff access from customer access and require stronger controls for sensitive areas.
+
+  </Card>
+  <Card title="Password Reset" icon="lock" href="#password-reset">
+
+  Offer a secure reset flow that verifies identity before issuing a new password link.
+
+  </Card>
+  <Card title="Session Security" icon="settings" href="#session-and-security-settings">
+
+  Define timeout rules, device behavior, and re-authentication for important actions.
+
+  </Card>
+</Columns>
+
+### Recommended login flow
+
+Use a simple sequence so users know what happens next.
+
+<Steps>
+  <Step title="Enter credentials" icon="key">
+
+  The user enters their email or username and password on the sign-in screen.
+
+  </Step>
+  <Step title="Verify identity" icon="check-circle">
+
+  The system checks credentials, account status, and any required second factor.
+
+  </Step>
+  <Step title="Assign access" icon="arrow-right">
+
+  You route the user to the correct area based on role and permission set.
+
+  </Step>
+  <Step title="Start session" icon="zap">
+
+  You create a session, record the login event, and load the correct dashboard.
+
+  </Step>
+</Steps>
+
+## Authentication methods
+
+Use Tabs to compare the most common access patterns. The right choice depends on whether you are serving internal staff, recurring customers, or both.
+
+<Tabs>
+  <Tab title="Email and password" icon="mail">
+
+    This is the most familiar option for customers. Pair it with password rules, reset support, and optional two-factor authentication for sensitive accounts.
+
+    ```javascript
+    const loginResponse = await fetch("https://api.example.com/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: "customer@company.com",
+        password: "CorrectHorseBatteryStaple"
+      })
+    });
+
+    const data = await loginResponse.json();
+    console.log(data.sessionId);
+    ```
+
+  </Tab>
+  <Tab title="Magic link" icon="link">
+
+    Use this when you want a passwordless experience. It works well for low-risk access or temporary customer sessions.
+
+    ```javascript
+    const response = await fetch("https://api.example.com/auth/magic-link", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: "customer@company.com",
+        returnUrl: "https://dashboard.example.com/portal"
+      })
+    });
+
+    console.log(await response.json());
+    ```
+
+  </Tab>
+  <Tab title="Single sign-on" icon="lock">
+
+    Use single sign-on for internal teams so employees can sign in with a company identity provider and inherit centrally managed rules.
+
+    ```javascript
+    const ssoConfig = {
+      provider: "saml",
+      issuer: "https://auth.example.com/sso",
+      audience: "cfc-ops-dashboard"
+    };
+
+    console.log(ssoConfig);
+    ```
+
+  </Tab>
+</Tabs>
+
+## Implementation examples
+
+Use `CodeGroup` when you need the same action in multiple languages. The examples below show a realistic password login request and a session check.
+
+<CodeGroup tabs="JavaScript,Python,cURL">
+  ```javascript
+  const response = await fetch("https://api.example.com/auth/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      email: "agent@company.com",
+      password: "StrongPassword123!"
+    })
+  });
+
+  const result = await response.json();
+
+  if (response.ok) {
+    window.location.assign("https://dashboard.example.com/app");
+  } else {
+    console.error(result.message);
+  }
+  ```
+  ```python
+  import requests
+
+  response = requests.post(
+      "https://api.example.com/auth/login",
+      json={
+          "email": "agent@company.com",
+          "password": "StrongPassword123!"
+      },
+      timeout=10
+  )
+
+  data = response.json()
+
+  if response.ok:
+      print(data["sessionId"])
+  else:
+      print(data["message"])
+  ```
+  ```bash
+  curl -X POST "https://api.example.com/auth/login" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "email": "agent@company.com",
+      "password": "StrongPassword123!"
+    }'
+  ```
+</CodeGroup>
+
+## Roles and permissions
+
+Keep authorization separate from authentication. Authentication answers who the user is, while authorization answers what the user can do.
+
+| Role | Typical access | Notes |
+|------|----------------|-------|
+| Administrator | Full account settings, user management, billing configuration | Use for a small trusted group |
+| Operator | Daily workflow tools, shipment updates, support actions | Good for internal operational teams |
+| Customer | Portal access, profile updates, quote requests, tracking tools | Limit access to owned records |
+| Read-only viewer | Reports, status pages, audit history | Useful for audits and oversight |
+
+## Security and session settings
+
+Set session rules so users stay productive without weakening security. A shorter timeout is safer for sensitive tools, while longer sessions may work for low-risk portal views.
+
+<Callout kind="alert">
+
+Do not store passwords in client-side code or log raw credentials in application logs. Always protect recovery links, session cookies, and reset tokens.
+
+</Callout>
+
+### Suggested settings
+
+- Use secure, HTTP-only cookies for session storage.
+- Rotate session identifiers after login and privilege changes.
+- Require re-authentication for profile edits, billing updates, and permission changes.
+- Expire inactive sessions after a defined period.
+- Track failed login attempts and alert on unusual activity.
+
+## Password reset
+
+A secure reset flow should verify the user before changing access. Keep the process short and explain every step clearly.
+
+<Steps>
+  <Step title="Request reset" icon="mail">
+
+  The user submits an email address from the sign-in page.
+
+  </Step>
+  <Step title="Send link" icon="send">
+
+  You send a time-limited reset link to the verified inbox.
+
+  </Step>
+  <Step title="Set a new password" icon="shield">
+
+  The user creates a new password that meets your policy rules.
+
+  </Step>
+  <Step title="Confirm success" icon="check-circle">
+
+  You invalidate old sessions and confirm that the account is secure again.
+
+  </Step>
+</Steps>
+
+## FAQ
+
+<Expandable title="How do I separate customer and internal access?" default-open="true">
+
+Use distinct roles, route users to different dashboards, and apply different permission sets to customer records and staff tools.
+
+</Expandable>
+
+<Expandable title="Should every user have two-factor authentication?" default-open="false">
+
+Strongly encourage it for administrators and staff. You can make it optional for customers if your risk profile allows it.
+
+</Expandable>
+
+<Expandable title="What should I do after a password reset?" default-open="false">
+
+Invalidate existing sessions, notify the user by email, and prompt them to review recent account activity.
+
+</Expandable>
+
+<Expandable title="How long should a session last?" default-open="false">
+
+Choose a timeout based on sensitivity. Internal tools usually need shorter sessions than customer-facing portals.
+
+</Expandable>
+
+## Next steps
+
+After you define your login rules, connect them to your own identity provider, portal layout, and audit logging. You can also create a dedicated quickstart page for implementation details and a changelog page for access policy changes.
+
+<Columns cols={2}>
+  <Card title="Quickstart" icon="book-open" href="/quickstart" horizontal>
+
+  Learn how to wire authentication into your app step by step.
+
+  </Card>
+  <Card title="Changelog" icon="arrow-right" href="/changelog" horizontal>
+
+  Track updates to access rules, session policies, and security behavior.
+
+  </Card>
+</Columns>

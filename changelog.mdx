@@ -1,0 +1,197 @@
+---
+title: Changelog
+description: Review the latest documentation and product updates for CFC Ops. Stay informed about new features, workflow improvements, and important changes.
+---
+
+## Overview
+
+This changelog helps you track recent documentation and product updates for CFC Ops. It is designed as a starter kit, so you can adapt the entries, examples, and release cadence to match your own workflow.
+
+Use this page to summarize what changed, why it matters, and what you should review next. The examples below show a simple structure you can keep for future releases.
+
+<Callout kind="tip">
+This is sample documentation for a starter kit. Replace the dates, version numbers, and release notes with your own project history.
+</Callout>
+
+## Recent Updates
+
+<Update label="2026-10-15" description="v2.4.0" tags={["feature", "improvement"]}>
+
+### New Features
+
+- Added a shipment milestone timeline so you can review status changes from pickup to delivery.
+- Introduced a consolidated shipments view for teams that manage regional and cross-dock operations.
+- Added support for shipping notes that stay attached to the order record across workflow stages.
+
+### Improvements
+
+- Improved page performance on large manifests and dense route lists.
+- Refined the default documentation structure so you can add release notes faster.
+- Updated field labels to be more consistent across tracking and dispatch workflows.
+
+### Bug Fixes
+
+- Fixed an issue where status filters reset after navigation.
+- Resolved an intermittent display problem in long tracking histories.
+- Corrected a date formatting mismatch in summary cards.
+
+</Update>
+
+<Update label="2026-09-18" description="v2.3.0" tags={["feature", "bugfix"]}>
+
+### New Features
+
+- Added a tracking lookup flow with clearer shipment status details.
+- Added downloadable summary output for internal review and customer support.
+- Included a new route notes section for dispatch teams.
+
+### Improvements
+
+- Simplified the steps for documenting shipment exceptions.
+- Reduced the number of clicks needed to move between tracking and customer records.
+- Improved empty-state messaging so users know what to do next.
+
+### Bug Fixes
+
+- Fixed a broken link in the documentation navigation example.
+- Resolved an issue that affected saved filters in older browsers.
+- Corrected spacing in the release note layout.
+
+</Update>
+
+<Update label="2026-08-22" description="v2.2.0" tags={["breaking", "feature", "improvement"]}>
+
+### New Features
+
+- Added a new workflow template for shipment intake.
+- Introduced role-based task guidance for operations teams.
+- Added a configurable status vocabulary so you can align labels with your process.
+
+### Improvements
+
+- Streamlined the documentation layout for faster onboarding.
+- Improved the clarity of release summaries for non-technical readers.
+- Updated example data to better reflect shipping and logistics use cases.
+
+### Bug Fixes
+
+- Fixed a formatting issue in long-form notes.
+- Resolved an error that appeared when editing older draft entries.
+- Corrected a missing description in the update list.
+
+### Deprecated Workflows
+
+- Deprecated the legacy intake summary flow.
+- Replaced the old status naming pattern with the new configurable vocabulary.
+- Marked manual handoff notes as legacy for future cleanup.
+
+</Update>
+
+## Release Summary
+
+<Columns cols={3}>
+  <Card title="Shipping Features" icon="truck" href="/quickstart">
+    Review workflow changes that affect pickups, deliveries, and consolidated shipments.
+  </Card>
+  <Card title="Tracking Improvements" icon="location" href="/authentication">
+    See how status updates, lookup flow changes, and record visibility have evolved.
+  </Card>
+  <Card title="Documentation Updates" icon="book-open" href="/introduction">
+    Use the starter kit structure to organize release notes, guides, and support content.
+  </Card>
+</Columns>
+
+## How to Review Releases
+
+<Steps>
+  <Step title="Check the version" icon="check-circle">
+    Compare the release date and version number with your internal deployment record.
+  </Step>
+  <Step title="Read the sections" icon="book-open">
+    Focus on new features, improvements, bug fixes, and any deprecated workflows.
+  </Step>
+  <Step title="Test impacted flows" icon="settings">
+    Validate the areas affected by the change, such as tracking, shipping notes, or reports.
+  </Step>
+  <Step title="Update your docs" icon="edit-3">
+    Replace starter content with your own product terminology and support process.
+  </Step>
+</Steps>
+
+## Example Release Notes Format
+
+<CodeGroup tabs="Markdown,JSON">
+  ```markdown
+## v2.5.0
+
+### New Features
+- Added shipment status summary cards.
+- Added a faster tracking lookup page.
+
+### Improvements
+- Simplified onboarding steps for new operators.
+
+### Bug Fixes
+- Fixed a filter reset issue after navigation.
+  ```
+
+  ```json
+  {
+    "version": "v2.5.0",
+    "date": "2026-11-01",
+    "highlights": [
+      "Shipment status summary cards",
+      "Faster tracking lookup",
+      "Simplified onboarding"
+    ]
+  }
+  ```
+</CodeGroup>
+
+## Release Notes by Category
+
+<Tabs>
+  <Tab title="Features" icon="zap">
+    
+New features should explain what changed and who benefits. For CFC Ops, that often includes tracking visibility, shipping coordination, and clearer dispatch workflows.
+
+  </Tab>
+  <Tab title="Improvements" icon="arrow-right">
+    
+Use improvements for performance updates, wording changes, and workflow refinements that make daily operations easier.
+
+  </Tab>
+  <Tab title="Deprecated Workflows" icon="alert-triangle">
+    
+List older flows here when you replace them with a new process. Include a migration note so your team knows what to use instead.
+
+  </Tab>
+</Tabs>
+
+## What to Track Next
+
+<ExpandableGroup>
+  <Expandable title="How often should you publish updates?" default-open="true">
+    
+Publish updates whenever you ship a meaningful change. For most teams, a monthly or biweekly release note works well.
+
+  </Expandable>
+  <Expandable title="What should each release include?" default-open="false">
+    
+Include the version, the release date, the main user impact, and any actions readers need to take.
+
+  </Expandable>
+  <Expandable title="How do you handle breaking changes?" default-open="false">
+    
+Call out breaking changes clearly, explain the old behavior, and describe the replacement workflow in plain language.
+
+  </Expandable>
+</ExpandableGroup>
+
+## Next Steps
+
+<Callout kind="info">
+If you customize this page, keep the same structure so readers can scan updates quickly and understand what changed.
+</Callout>
+
+Use this changelog as a template for future releases. Add your newest version at the top, keep older entries below it, and remove starter notes once your documentation is ready for production.
